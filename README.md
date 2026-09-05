@@ -1,10 +1,6 @@
 # SQL Practice
 
-SQL practice using MySQL and MySQL Workbench.
-
-## Datasets
-- Smartphones dataset
-- IPL dataset
+SQL practice using MySQL and MySQL Workbench for AI/ML roles
 
 ## SQL Concepts
 - SELECT
