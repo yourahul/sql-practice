@@ -15,3 +15,7 @@ SQL practice using MySQL and MySQL Workbench.
 - HAVING
 - ORDER BY
 - LIMIT
+- JOINS
+  - INNER JOIN
+  - LEFT JOIN
+  - Multiple-column JOINs
