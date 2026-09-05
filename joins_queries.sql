@@ -1,0 +1,47 @@
+Q1
+-- Find all profitable orders
+SELECT t1.order_id, sum(profit) as "acutal_profit"FROM flipkart.orders t1
+join flipkart.order_details t2
+on t1.order_id = t2.order_id
+group by t1.order_id
+having acutal_profit > 0;
+
+
+Q2
+-- Find the customer who has placed max number of orders
+SELECT t1.name, count(*) FROM flipkart.users t1
+join flipkart.orders t2
+on t1.user_id = t2.user_id
+group by t1.name
+order by count(*) desc
+Limit 1
+
+
+Q3
+-- Which is the most profitable category
+SELECT t2.vertical, sum(profit)  FROM flipkart.order_details t1
+join flipkart.category t2
+on t1.category_id = t2.category_id
+group by t2.vertical
+order by sum(profit) desc
+LIMIT 1
+
+
+Q4
+-- Which is the most profitable state
+  SELECT t3.state, sum(profit) FROM flipkart.orders t1
+join flipkart.order_details t2
+on t1.order_id = t2.order_id
+join flipkart.users t3
+on t1.user_id = t3.user_id
+group by t3.state
+order by sum(profit) desc Limit 1
+
+
+Q5
+-- Find all categories with profit higher than 5000
+SELECT t2.vertical, sum(profit) FROM flipkart.order_details t1
+join flipkart.category t2
+on t1.category_id = t2.category_id
+group by t2.vertical
+having sum(profit) > 4000
