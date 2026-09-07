@@ -89,3 +89,65 @@ SELECT BattingTeam,sum(total_run) AS TotalRuns
 FROM campusx.ipl
 GROUP BY BattingTeam
 HAVING SUM(total_run) < 1000;
+
+Q10
+SELECT t1.state,t1.name,t2.order_id FROM flipkart.users t1
+JOIN flipkart.orders t2
+on t1.user_id = t2.user_id
+WHERE t1.state = 'karnataka'
+
+Q11
+SELECT t1.name,
+	t3.order_id,
+    SUM(t3.profit)  AS 'total_profit'
+FROM flipkart.users t1
+JOIN flipkart.orders t2
+on t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+on t3.order_id = t2.order_id
+GROUP BY t3.order_id, t1.name
+ORDER BY total_profit DESC;
+
+Q12
+SELECT t1.name AS "customer name",
+	   sum(t3.amount)  AS total_sales,
+       sum(t3.profit)  AS  total_profit
+FROM flipkart.users t1
+JOIN flipkart.orders t2
+on t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+on t3.order_id = t2.order_id
+GROUP BY t1.name
+ORDER BY total_profit DESC;
+
+Q13
+SELECT t1.state,
+		sum(t3.profit) AS total_profit,
+        t4.category
+FROM flipkart.users t1
+JOIN flipkart.orders t2
+on t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+on t3.order_id = t2.order_id
+JOIN flipkart.category t4
+on t4.category_id = t3.category_id
+GROUP BY t4.category,t1.state
+ORDER BY t1.state, total_profit DESC;
+
+Q14
+SELECT t1.state,
+	   t4.category,
+       sum(t3.profit) AS total_profit,
+        COUNT(t2.order_id) AS number_of_orders
+	FROM flipkart.users t1
+JOIN flipkart.orders t2
+on t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+on t3.order_id = t2.order_id
+JOIN flipkart.category t4
+on t4.category_id = t3.category_id
+GROUP BY t1.state, t4.category
+HAVING  total_profit > 2000
+AND number_of_orders >= 3
+ORDER BY  total_profit DESC 
+LIMIT 5
