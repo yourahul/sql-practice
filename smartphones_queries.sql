@@ -56,3 +56,44 @@ Having count(*) >= 5
 order by avg(price) desc
 Limit 5
 
+Q11
+SELECT t1.state,
+	t4.category
+FROM flipkart.users t1
+Join flipkart.orders t2
+ON t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+ON t3.order_id = t2.order_id
+JOIN flipkart.category t4
+ON t4.category_id = t3.category_id 
+Group by t1.state, t4.category
+having sum(t3.profit)  > 30
+
+UNION
+
+SELECT t1.state,
+	t4.category
+FROM flipkart.users t1
+Join flipkart.orders t2
+ON t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+ON t3.order_id = t2.order_id
+JOIN flipkart.category t4
+ON t4.category_id = t3.category_id 
+Group by t1.state, t4.category
+having count(distinct t3.order_id) >= 2
+
+Q12
+SELECT model,brand_name,price,rating 
+FROM campusx.smartphones_cleaned_v6
+where rating >= 85 
+
+UNION
+
+SELECT model,brand_name,price,rating 
+FROM campusx.smartphones_cleaned_v6
+where price < 10000
+
+Q13
+
+
