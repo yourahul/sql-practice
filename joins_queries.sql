@@ -151,3 +151,32 @@ HAVING  total_profit > 2000
 AND number_of_orders >= 3
 ORDER BY  total_profit DESC 
 LIMIT 5
+
+Q15
+SELECT t1.name, t1.state, t2.order_id FROM flipkart.users t1
+JOIN flipkart.orders t2
+ON t1.user_id = t2.user_id
+WHERE t1.state = 'karnataka' OR t1.state = 'kerala'
+ORDER BY t1.state ASC, t2.order_id DESC
+
+Q16
+SELECT t1.name,sum(t3.profit) AS totalprofit FROM flipkart.users t1
+JOIN flipkart.orders t2
+ON t1.user_id = t2.user_id
+JOIN flipkart.order_details t3
+ON t3.order_id = t2.order_id
+GROUP BY t1.name
+HAVING totalprofit > 5000
+ORDER BY totalprofit DESC
+
+Q17
+SELECT t2.vertical,
+	sum(t1.profit) as totalprofit,
+    COUNT(DISTINCT t1.order_id) as number_of_orders
+FROM flipkart.order_details t1
+JOIN flipkart.category t2
+ON t1.category_id = t2.category_id
+group by t2.vertical
+HAVING COUNT(DISTINCT t1.order_id) >= 5
+order by totalprofit desc
+LIMIT 5;
